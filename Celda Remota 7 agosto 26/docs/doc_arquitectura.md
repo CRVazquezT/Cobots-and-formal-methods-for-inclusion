@@ -18,7 +18,7 @@ La documentación se basa en la descripción proporcionada en esta conversación
 # 2\. Vista general de la arquitectura
 arquitectura1
 
-![](docs/imagenes/arquitectura1.jpg)
+![](imagenes/arquitectura1.jpg)
 
 
 # 3\. Componentes principales
@@ -72,7 +72,7 @@ La comunicación entre pi1 y el robot se realiza por TCP/IP con IPs fijas, de ac
 
 En el Modo 1, el operador genera directamente los movimientos deseados mediante un SpaceMouse 3Dconnexion. El video de las cámaras de la estación robot proporciona al operador la percepción visual de la escena.
 
-![](docs/imagenes/arquitectura2.jpg)
+![](imagenes/arquitectura2.jpg)
 
 <br/>Cámaras ─► pi1 / camaras3 ─► MediaMTX ─► navegador del operador
 
@@ -93,7 +93,7 @@ En el Modo 1, el operador genera directamente los movimientos deseados mediante 
 
 Las dos cámaras de la estación robot están conectadas físicamente a pi1. El script camaras3 configura las cámaras y abre el servicio de streaming mediante MediaMTX.
 
-![](docs/imagenes/arquitectura3.jpg)
+![](imagenes/arquitectura3.jpg)
 
 El streaming es independiente del canal MQTT de teleoperación. MQTT transporta los mensajes de control/datos, mientras que MediaMTX proporciona el canal de video.
 
@@ -101,7 +101,7 @@ El streaming es independiente del canal MQTT de teleoperación. MQTT transporta 
 
 El Modo 2 sustituye la visualización directa por video por una representación espacial en Meta Quest 3. pi1 utiliza la cámara Intel RealSense RGB-D para identificar los píxeles/voxels asociados a las piezas a manipular.
 
-![](docs/imagenes/arquitectura4.jpg)
+![](imagenes/arquitectura4.jpg)
 
 # 12\. Segmentación en Modo 2
 
@@ -126,7 +126,7 @@ La aplicación Unity de Meta Quest 3 recibe desde mqttMeta la pose del robot y l
 
 # 14\. Retorno de la pose deseada en Modo 2
 
-![](docs/imagenes/arquitectura5.jpg)
+![](imagenes/arquitectura5.jpg)
 
 # 15\. Datos principales del sistema
 
@@ -155,7 +155,7 @@ La aplicación Unity de Meta Quest 3 recibe desde mqttMeta la pose del robot y l
 # 17\. Diagrama de arquitectura por capas
 
 CAPA FÍSICA  
-![](docs/imagenes/arquitectura6.jpg)
+![](imagenes/arquitectura6.jpg)
 
 <br/>MODO 1: SpaceMouse + Video  
 MODO 2: RealSense + Voxels + Meta Quest 3
