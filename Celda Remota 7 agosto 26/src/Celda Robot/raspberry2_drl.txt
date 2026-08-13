@@ -1,0 +1,88 @@
+Código DRL – Robot Doosan
+001  global sock_id
+002  sock_id=None
+003  global flag_hilo
+004  global reg_DO8
+005  reg_DO8=0
+006  flag_hilo=1
+007  
+008  def send_tcp_pos():
+009  global flag_hilo
+010  global sock_id
+011  global reg_DO8
+012  while flag_hilo==1:
+013      cp,_=get_current_posx(ref=DR_BASE)
+014      pos_string="{0:.2f},{1:.2f},{2:.2f},{3:.2f},{4:.2f},{5:.2f}, {6:d}\n".format(cp[0],cp[1],cp[2],cp[3],cp[4],cp[5],reg_DO8)
+015      server_socket_write(sock_id,pos_string.encode('utf-8'))
+016      wait(0.5)
+017  
+018  while True:
+019      if sock_id is not None:
+020          try:
+021              server_socket_close(sock_id)
+022          except:
+023              pass
+024          sock_id=None
+025          sleep(0.5)
+026      try:
+027          sock_id=server_socket_open(20002)
+028          dl=[0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+029  
+030          th_id=thread_run(send_tcp_pos)
+031          try:
+032              while True:
+033                  res,datab=server_socket_read(sock_id,timeout=1)
+034                  #pos,_=get_current_posx()
+035                  if res<=0:
+036                      break
+037                  try:
+038                      datas=datab.decode('utf-8').strip()
+039                      tokens=datas.split(",")
+040                      if len(tokens)==7:
+041                          for i in range(7):
+042                              dl[i]=float(tokens[i])
+043                          offset=[dl[0],dl[1],dl[2],dl[3],dl[4],dl[5]]
+044                          vg=dl[6]
+045                          if vg<=1.5:
+046                              amovel(offset,v=200,a=200,mod=DR_MV_MOD_REL, ref=DR_BASE)
+047                              if vg>0.5:
+048                                  set_digital_output(8,1)
+049                                  reg_DO8=1
+050                              else:
+051                                  set_digital_output(8,0)
+052                                  reg_DO8=0
+053                          elif vg==2.0:
+054                              try:
+055                                  rd,_=get_current_posx()
+056                                  #dov=get_digital_output(8)
+057                                  #dof=float(dov)
+058                                  dof=1.0
+059                                  rd_x=rd[0]
+060                                  rd_y=rd[1]
+061                                  rd_z=rd[2]
+062                                  rd_rx=rd[3]
+063                                  rd_ry=rd[4]
+064                                  rd_rz=rd[5]
+065                                  mensaje="{},{},{},{},{},{},{}\n".format(rd_x, rd_y,rd_z,rd_rx,rd_ry,rd_rz,dof)
+066                                  server_socket_write(sock_id,mensaje.encode('utf-8'))
+067                              except:
+068                                  print("Error capturando datos de robot")
+069                  except:
+070                      print("Error de lectura de datos")
+071  
+072  
+073          if sock_id is not None:
+074              server_socket_close(sock_id)
+075              sock_id=None
+076          finally:
+077              flag_hilo=0
+078              thread_stop(th_id)
+079  
+080  except:
+081      try:
+082          server_socket_close(sock_id)
+083      except:
+084          pass
+085      sock_id=None
+086      sleep(1.0)
+087      sleep(1.0)
