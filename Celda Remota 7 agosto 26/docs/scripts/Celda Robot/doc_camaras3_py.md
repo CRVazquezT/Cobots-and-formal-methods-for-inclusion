@@ -121,7 +121,7 @@ La interfaz Tkinter tiene una ventana de 590×620 píxeles. Incluye herramientas
 - Desconectar
 - Panel de estado
 
-![](docs/imagenes/camaras3.png)
+![](../../imagenes/camaras3.png)
 
 
 # 14\. Dependencias
