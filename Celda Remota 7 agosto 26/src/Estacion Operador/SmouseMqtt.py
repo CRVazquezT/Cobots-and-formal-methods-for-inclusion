@@ -13,14 +13,14 @@ boton_izquierdo_presionado = False
 MENSAJE = "Inicializando..."
 sensibilidad=0.02
 esta_bloqueado = True  # False significa que el sistema está "Desbloqueado" (Botón dice Bloquear)
-CONTRASENA = "1234"  # Configura aquí tu contraseña numérica o de texto
+CONTRASENA = "1234"  # Configura la contraseña numérica o de texto
 
 # --- CONFIGURACIÓN DE CONEXIÓN (HIVEMQ CLOUD) ---
 VENDOR_ID = 0x256F
 PRODUCT_ID = 0xC63A
 
-# Reemplaza estos marcadores con tus datos reales de la consola de HiveMQ
-MQTT_BROKER = "0319358e340a4537960aa39a9b9b32cc.s1.eu.hivemq.cloud"  # El Hostname de tu Overview tab
+# Datos de HiveMQ
+MQTT_BROKER = "0319358e340a4537960aa39a9b9b32cc.s1.eu.hivemq.cloud"  # El Hostname del Overview tab
 MQTT_PORT = 8883                                   # Puerto TLS estándar para HiveMQ
 MQTT_USER = "Automatica_Lab"                    # Creado en Access Management
 MQTT_PASSWORD = "aLab0123456789"
@@ -204,11 +204,7 @@ def hilo_background():
         try: device.close()
         except: pass
         cliente_mqtt.loop_stop()
-        cliente_mqtt.disconnect()
-
-# --- HILO PRINCIPAL: INTERFAZ TKINTER ---
-   
-       
+        cliente_mqtt.disconnect()      
 
 
 

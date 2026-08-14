@@ -57,7 +57,7 @@ def conectar_robot_fisico(ip, puerto, var_estado):
 
 def hilo_procesador_robot():
     """Hilo único del robot: Envía comandos y lee la respuesta SÓLO si es un trigger (2.0)"""
-    # CORRECCIÓN DEFINITIVA: Declarar 'sock' como global para evitar el error de variable local no asociada
+    
     global sock, hilo_robot_vivo, robot_debe_conectar
     print("[HILO ROBOT] Inicializado y esperando condicionales de Trigger (Pose == 2.0)...")
     

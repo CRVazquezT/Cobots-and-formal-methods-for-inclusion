@@ -57,9 +57,7 @@ class AppRealSense:
         self.f_der = ttk.Frame(self.root, padding=10);
         self.f_der.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True)
 
-        # =========================================================================
-        # NUEVA DISTRIBUCIÓN GRÁFICA CORREGIDA (Imágenes grandes verticales / Zoom derecha)
-        # =========================================================================
+
         # Imagen Original: Fila 0, Columna 0 (Arriba a la izquierda)
         self.lbl_orig = ttk.Label(self.f_der)
         self.lbl_orig.grid(row=0, column=0, padx=5, pady=5, sticky="nsew")
@@ -87,7 +85,6 @@ class AppRealSense:
 
         self.bucle()
 
-        # Coloca esto en el __init__ de tu aplicación principal
         self.cliente_mqtt = None
         self.mqtt_activo = False  # Controla si el usuario presionó el botón de activar
 
@@ -105,9 +102,7 @@ class AppRealSense:
         self.sld_dmax.set(80)
         self.sld_dmax.pack(fill=tk.X, pady=0)
 
-        # =========================================================================
-        # NUEVO: CREAR UN CONTENEDOR EN FILAS Y COLUMNAS PARA LOS COLORES HSV
-        # =========================================================================
+
         frame_colores_grid = ttk.Frame(self.f_izq)
         frame_colores_grid.pack(fill=tk.X, pady=1)
 
@@ -377,7 +372,7 @@ class AppRealSense:
         # Si tenemos datos (ya sean nuevos filtrados o históricos), dibujamos los ejes estables
         if self.rvec_guardado is not None:
             cv2.drawFrameAxes(img_orig, self.mtx, self.dist, self.rvec_guardado, self.tvec_guardado, self.L * 0.8, 3)
-            # --- NUEVA LÍNEA: Dibujamos el volumen 3D dinámico ---
+            # --- Dibujamos el volumen 3D dinámico ---
             self.dibujar_bbox_3d(img_orig, self.rvec_guardado, self.tvec_guardado)
         
         # Variables limpias listas para el siguiente procesamiento
@@ -483,7 +478,7 @@ class AppRealSense:
             print(f"Error bucle: {e}")
         self.root.after(66, self.bucle)
 
-    # Esta es la lógica que debe ejecutar tu hilo cuando el usuario interactúa con el botón   
+ 
     def gestionar_conexion_mqtt(self):
     
         # --- SUB-FUNCIÓN CALLBACK: Se ejecuta automáticamente al recibir un mensaje ---
@@ -553,7 +548,7 @@ class AppRealSense:
                 self.cliente_mqtt.connect(snap["url"], snap["port"], keepalive=60)
                 self.cliente_mqtt.loop_start() 
                 
-                # --- NUEVA LÍNEA: Suscribirse al tópico del Trigger ---
+
                 # Nos suscribimos con QoS 1 para asegurar que no se pierdan peticiones remotas
                 self.cliente_mqtt.subscribe("voxelsTrigger", qos=1)
                 
