@@ -32,7 +32,7 @@ Modo 2: el operador utiliza un visor de realidad virtual, en el que se ejecuta u
 # **3. Vista general de la arquitectura**
 
 
-![](Celda Remota 7 agosto 26/docs/imagenes/arquitectura1.jpg)
+![](Celda%20Remota%207%20agosto%2026/docs/imagenes/arquitectura1.jpg)
 
 
 |Componente|Ubicación|Software / interfaz|Función|
@@ -53,7 +53,7 @@ Los detalles de la arquitectura se presentan en el documento //Celda remota 7 ag
 # **4. Organización**
 
 
-![](Celda Remota 7 agosto 26/docs/imagenes/index1.jpg)
+![](Celda%20Remota%207%20agosto%2026/docs/imagenes/index1.jpg)
 
 # **5. Declaración de uso de IA**
 
